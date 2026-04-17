@@ -2,16 +2,12 @@ import axios from 'axios';
 
 let baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
-// Human-friendly URL cleaning:
-// 1. If it doesn't end with '/api', add it (unless it's just a slash or empty)
 if (baseURL && !baseURL.endsWith('/api') && !baseURL.endsWith('/api/')) {
-  // Only append if it's not already pointing deeper
   if (!baseURL.includes('/api/')) {
     baseURL = baseURL.endsWith('/') ? `${baseURL}api` : `${baseURL}/api`;
   }
 }
 
-// 2. Remove trailing slash to prevent double slashes like /api//auth
 baseURL = baseURL.replace(/\/$/, "");
 
 const api = axios.create({
